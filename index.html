@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101827">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="3言語翻訳">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <title>3言語オフライン翻訳</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="eyebrow">LOCAL TRANSLATOR</div>
+      <h1>3言語翻訳</h1>
+      <p class="sub">日本語・Монгол・English</p>
+      <div id="status" class="status" role="status">初回は翻訳モデルのダウンロードが必要です</div>
+    </header>
+
+    <section class="panel">
+      <div class="language-row">
+        <label>翻訳元
+          <select id="source">
+            <option value="jpn_Jpan">日本語</option>
+            <option value="khk_Cyrl">モンゴル語</option>
+            <option value="eng_Latn">英語</option>
+          </select>
+        </label>
+        <button id="swap" class="swap" aria-label="翻訳元と翻訳先を入れ替え">⇄</button>
+        <label>翻訳先
+          <select id="target">
+            <option value="khk_Cyrl">モンゴル語</option>
+            <option value="eng_Latn">英語</option>
+            <option value="jpn_Jpan">日本語</option>
+          </select>
+        </label>
+      </div>
+
+      <label class="field-label" for="inputText">翻訳したい文章</label>
+      <textarea id="inputText" rows="6" placeholder="ここに文章を入力してください"></textarea>
+      <div class="actions">
+        <button id="clear" class="secondary">クリア</button>
+        <button id="translate" class="primary">翻訳する</button>
+      </div>
+    </section>
+
+    <section class="panel result-panel">
+      <div class="result-heading">
+        <span class="field-label">翻訳結果</span>
+        <button id="copy" class="copy" disabled>コピー</button>
+      </div>
+      <div id="outputText" class="output" aria-live="polite">翻訳結果がここに表示されます。</div>
+    </section>
+
+    <section class="model-panel">
+      <div class="model-title">オフライン利用の準備</div>
+      <p id="modelInfo">初回のみインターネット接続が必要です。翻訳モデルの読み込みが完了すると、対応データを端末内のブラウザ保存領域にキャッシュします。</p>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <button id="download" class="secondary full">翻訳モデルを準備する</button>
+      <p class="small">モデル容量が大きいため、初回はWi-Fi接続と十分な空き容量を推奨します。</p>
+    </section>
+
+    <footer>
+      <p>翻訳処理は端末内で実行する設計です。入力文を翻訳サーバーへ送信しません。</p>
+      <p class="small">翻訳モデル：Meta NLLB-200 distilled 600M（Transformers.js / ONNX）</p>
+    </footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
